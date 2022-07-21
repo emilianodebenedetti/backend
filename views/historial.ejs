@@ -1,0 +1,32 @@
+<h2>Historial</h2>
+
+<% if (productos.length > 0){ %>
+    
+        <div class="overflow-x-auto">
+            <table class="table w-full">
+              <!-- head -->
+              <thead>
+                <tr>
+                  <th>Imagen</th>
+                  <th>Producto</th>
+                  <th>Stock</th>
+                  <th>Precio</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- row 1 -->
+                <% for (const producto of productos) {%>
+                <tr>
+                  <th><img class="w-20" src="<%=producto.imagen%>"><!-- <%=producto.imagen%> --></img></th>
+                  <th><%=producto.nombre%></th>
+                  <th><%=producto.stock%></th>
+                  <th><%=producto.precio%></th>  
+                </tr>
+                <%};%>                
+              </tbody>
+            </table>
+        </div>
+    <% } else { %>
+        <h3> no se encontraron datos</h3>
+    <% } %>
+
