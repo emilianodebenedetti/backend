@@ -1,28 +1,26 @@
 const express = require('express')
-/* const server = require('http').Server(app) */
-/* const io = require('socket.io')(server) */
-const { Server: HttpServer } = require('http')     
-const { Server: IOServer } = require('socket.io')  
-/* const handlebars = require("express-handlebars"); */   //cargamos modulo handlebars
+const { Router } = express
 
-//socket.io
+const Contenedor = require('./contenedores/Container.js')
+
 const app = express()
-const httpServer = new HttpServer(app)
-const io = new IOServer(httpServer)
+const prods = new CredentialsContainer('productos.json')
+const carrito = new CredentialsContainer('carrito.json')
 
-//establecemos config de handlebars
-/* app.engine(
-    "hbs",
-    handlebars({
-        extname: ".hbs",                            
-        defaultLayout: 'index.hbs',
-        layout: __dirname + "/views/layouts",
-        partialsDir: __dirname + '/views/partials'
-    })
-); */
-//establecemos motor d eplantilla a utilizar
-/* app.set("view engine", "hbs"); */
-//establecemos directorio donde se encuentran los archivos de plantilla
+const admin = true
+
+function NoAdmin(ruta, metodo) {
+    const error = {
+        error: -1,
+    }
+    if (ruta && metodo) {
+        error.descripcion = `ruta '${ruta}' metodo '${metodo}' no disponible`
+    }
+    else {
+        error.description = 'no disponible'
+    }
+    return error
+}
 app.set("views", "./views");
 //espacio publico del servidor
 app.use(express.static('public'))
